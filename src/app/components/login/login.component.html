@@ -1,0 +1,75 @@
+
+<div
+ *ngIf="loading"
+ class="loading-wraper">
+
+</div>
+
+<div class="title-wraper">
+    <h1 class="title">Welcome to User Panel</h1>
+</div>
+
+   <div
+   *ngIf="error"
+    class="error-matcher">
+    <span>{{ error }}</span>
+    <mat-icon
+    (click)="resetError()"
+    class="close-icon"
+    >close</mat-icon>
+   </div> 
+
+<div class="login-wraper">
+
+    <form [formGroup]="form" 
+    class="form"
+    >
+
+        <div class="field-wraper">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your email</mat-label>
+              <input matInput placeholder="Enter your email..."
+              formControlName="email">
+               <mat-error *ngIf="emailControl?.errors?.required">
+               This field is required.
+              </mat-error> 
+              <mat-error *ngIf="!emailControl?.errors?.required &&
+               emailControl?.errors?.email">
+                Please enter valid email.
+             </mat-error> 
+            </mat-form-field>
+          </div>
+    
+          <div class="field-wraper">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your password</mat-label>
+              <input matInput placeholder="Enter your password..."
+               formControlName="password"
+               [type]="showPassword()"
+               >
+               <mat-icon
+               class="eye-icon"
+               (click)="toggleShowPassword()"
+               >{{ icon }}</mat-icon>
+         <mat-error *ngIf="passwordControl?.errors?.required">
+            This field is required.
+         </mat-error>
+         <mat-error *ngIf="passwordControl?.errors?.minlength">
+            Password must be minimum 6 characters long.
+         </mat-error>  
+            </mat-form-field>
+          </div>
+
+     <a href="" class="rest-link" >Did you forget your password?</a>
+
+         <button 
+         (click)="onSubmit()"
+         mat-raised-button 
+         color="primary"
+         class="submit-button"
+         >Submit</button>
+
+    </form>
+    
+            
+</div>
